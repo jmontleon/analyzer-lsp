@@ -21,7 +21,7 @@ FROM jaegertracing/all-in-one:latest AS jaeger-builder
 # The unofficial base image w/ jdtls and gopls installed
 FROM quay.io/konveyor/jdtls-server-base
 
-COPY --from=jaeger-builder /go/bin/all-in-one-linux /usr/bin/
+COPY --from=jaeger-builder /go/bin/all-in-one-linux /usr/local/bin/all-in-one-linux
 
 COPY --from=builder /analyzer-lsp/konveyor-analyzer /usr/bin/konveyor-analyzer
 COPY --from=builder /analyzer-lsp/konveyor-analyzer-dep /usr/bin/konveyor-analyzer-dep
@@ -31,6 +31,7 @@ COPY --from=builder /analyzer-lsp/external-providers/golang-dependency-provider/
 COPY provider_container_settings.json /analyzer-lsp/provider_settings.json
 
 WORKDIR /analyzer-lsp
+RUN chgrp -R 0 /analyzer-lsp && chmod -R g=u /analyzer-lsp
 
 EXPOSE 16686
 
