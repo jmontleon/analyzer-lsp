@@ -1,5 +1,5 @@
 ARG JAVA_BUNDLE_TAG=latest
-FROM quay.io/konveyor/jdtls-server-base:${JAVA_BUNDLE_TAG} as base
+FROM quay.io/konveyor/jdtls-server-base:latest as base
 
 # Build the manager binary
 FROM golang:1.23.9 as builder
