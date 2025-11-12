@@ -137,12 +137,12 @@ jobs:
         podman manifest create temp
         podman manifest add temp --all quay.io/jmontleon/analyzer-lsp:${tag}
         podman manifest add temp --all quay.io/jmontleon/analyzer-lsp:${tag}-windowsservercore-ltsc2025
-        podman tag temp quay.io/konveyor/analyzer-lsp:${tag}
+        podman tag temp quay.io/jmontleon/analyzer-lsp:${tag}
     - name: Push manifest to Quay
       uses: redhat-actions/push-to-registry@main
       id: push
       with:
-        image: konveyor/analyzer-lsp
+        image: jmontleon/analyzer-lsp
         tags: ${{ env.tag }}
         username: ${{ secrets.QUAY_PUBLISH_ROBOT }}
         password: ${{ secrets.QUAY_PUBLISH_TOKEN }}
@@ -165,7 +165,7 @@ jobs:
       uses: redhat-actions/push-to-registry@main
       id: push
       with:
-        image: konveyor/dotnet-external-provider
+        image: jmontleon/dotnet-external-provider
         tags: ${{ env.tag }}
         username: ${{ secrets.QUAY_PUBLISH_ROBOT }}
         password: ${{ secrets.QUAY_PUBLISH_TOKEN }}
